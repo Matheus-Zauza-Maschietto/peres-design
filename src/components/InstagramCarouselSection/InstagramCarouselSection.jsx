@@ -124,7 +124,9 @@ export default function InstagramCarouselSection() {
             onSwiper={setSwiper}
             loop={true}
             centeredSlides={true}
+            speed={750}
             style={{ overflow: 'visible' }}
+            cssMode={false}
             autoplay={{
               delay: 1750,
               disableOnInteraction: false,
