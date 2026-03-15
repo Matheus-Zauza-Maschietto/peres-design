@@ -1,0 +1,155 @@
+import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import CarouselHeader from './Components/CarouselHeader';
+import CarouselSlide from './Components/CarouselSlide';
+import CarouselNavButton from './Components/CarouselNavButton';
+import CarouselSkeleton from './Components/CarouselSkeleton';
+
+const POSTS = [
+  {
+    id: 1,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_Ep3bbGh0q232tguXhM1a6G9n2-4iNOlw_g7pAp9UKnMh0y7OTxEYhWXZQjze-u3WtKVT4rjsEDsTtt3QrdrSGWHfV7pOawlnqLx3lQ2Zl9Y7haHuXuHDo3PetsGl1BJ5NhLbe_tS1-7rw3yb1KeTD4MPAtyjPmxfOAo06rfd7lT5zGtpL9YPxis2unFHyai4Odu8k63qnhoFw8zCpc2ajgjrAt6Z_q0z_DOw6ykAjLO5rPjWWMtHxghK1CDHR9ZrXzJM1WDP2YlpYO4sjOiOo0NcalWGn_W6pM-RLYqaC7pdOD6OYONCn90xOLkOyZrb-x26ZLVLFrX4xHojp3iezFQAVMcDfvCYI2-znegrgsz0BVvjly0xChhIZBw2FosOFT4APe7ip5vGAkz_mpBimQnEVOSlzzo9xonuEmQQnu3HhfogwzP3zUZpS-RVGc3JSTCMxKFOa_nbAJnR5GP41sddbF-PUMGwXkQBsh6L8X3dGu2UJIrs5yF0vqmk91gkxCIzT1pOMNAf0mmhOFwQBodr4DXTXzgZlxbPGeEVPaP0Ga41_NOdKF-pMa1tkEOvgQkbzyBt9XeajtW1BHzxrK5EAzO7NZsAGD9KzqkWVvChwJfHyeFaMoev0Yr9-1RYV0Rdo3Jzy_4uhYRSKZTY6mTacDgJLP0X8x9NJO6sYLq1Y2o6cvj90a275RDtAMUPc_rrtJyX3UDOEjdqh5PSo0gcFZ_aXuXqoNaR6h87QF-kv4rVyt4-jzQljCXNCPnznCQJMl2YfpvdPoVGIllb3MyaRzvv33ILVlGLM_vwnUQ1a6yUznGMy_1x41gJCI4wQQh7PJvxgWV-hVDQ0oPgR4-E0aXTXeDOAtXW6luBjJ1ySkzFRiiQBrBaP2ST-9g9loAPnNmZ5dYXl0FfUkKQSJPEw7_RcfvkgKjrHbJOiP-Mt9-hjU3WA_7LW78j3jjiVkp6UPzsodUCqlge2ecitcP3qs-odvqE-v-1aJv0J6iwjznYcHgmlAU1dpvLOtU7birPK_qmHGqzbHLF7C700DUkRFgvPPRtUos5vi_Ain=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram de Psicologas 1/5',
+  },
+  {
+    id: 2,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_GYZhn_3RXgTHWNxLaabxBHeH8H-XJQTVloe0rP_OqpLFpgPmDUV1biPdCdDEf0R_-TussxLaLLZslQVdMF6nMtWVmqu_TxhVtqNlJpq865P1nLNUfJ-d10JBQWAO_oBUqPkcS1TGcPjPqc5uR2sAzK25UpQWUj4HvQDw679R2gfa_YQV1gJ5ndMGly6ZV_63ak9qeMYKTpfXjNsz60DByHBEWxyIlb5WqBqOddxtVZM8Rh8UEW9sD3BrkZW7yXCTi7L6GXPZQHfaCsz3TlBQYs4SdX9Nn689avbFnhEleZdeGlsaT31ZPpapoL76gnOYcbrppgRZ709B6moDJrdQ9NugjZdQrUA75haMmnt62Hb3CpRlrNVynDLl2mfQ8i-O7s4GN3hu1qTX-0smD8QVY1riwQ3o8sUoYwxtx8WKc7cEojvOsAeQF0Seq7FyDRwcDuUzoQJyit7ObNFRyOKQhfgJRjC7IBy0TuijSXUSQqWr6R9XD0WbnQz1x9xaDfCMOa5q3C_XjlLJ5ccSScP3jJSbXr74OoKTm95y4KwLn5QRwiTplacHrKvojDKfwfDFktlDNPb0dGybsWJ5vGZE2Ebw5Ijo4CHJH-XJOPixNQYgNpd6FVLuQOrpeETUOy9NZ9AwXmlM744iPIBq7tc1kKCtawGLvio2BzS73JCwVEuB40QhOrNZeF320jibpPz2SgzIjqnLLG7AeE2RpBnOAFDmHxCpmljQoNlwWijczqw5TYAwZkNI6HCMENcSR-TtbrHzgQLk41QV2MSTciknVYL_Ml6VBXsVLiUKo7QR0tVK5OgcwFkRVFohnQgIZSXfrGq6TPR_hq1QxS-H_gbK2UMSb4xA6YwcvQh8NOtL_BqrNzhnn4pQq-IOhlZxHPpbsXf8tR-gK12s8RW2MPjjQKWTdwxhUbDFqQ651D9LS_7D6oQy6ih3h2VpAx_qbqqXZgFshhLYnHTEkGwZF94PdpHaD_mNQ7UWYEl5KH0VhGtcMMt_ISfBMWYIoc8kT1nxvBZx6NrpAgkpLBs9cOvIo9cKfQffNZ4-a1h4NFgX4=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram de Psicologas 2/5',
+  },
+  {
+    id: 3,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_HLfj9poQsaGEomhkRVR5v957-zjJo0Acgre4G08mZhmdcO_4LLV6PpYDwPnmZU6iAXVESn21Vc-lh8EDK6EFJtUYUKGvUvJSPBmpDwwXMwKtLHIHHfMQyUpEoKlMpgHDGRpDlv87Vw8d_ZzcOQAzv2kLDwv2VglENSy-E6mKQa8yO_lQ98LMkG8ku6BtvKuv21NiG5lxDeeTL81QSI4LcvLCoqiiW47Kqh-DDd2DVtUxuX_TticnQAVLfhC4NHaCcvACEm3QI86ulkB5liUjMYqYzRoYFEmXqUm-dL8BA9Q66Dwis9-zVuu-_qLpMZLVu8H-lghgOaHq30QAXJ0fMj74VKNWF2o8TUyt0k88d7TReW2DvnYIF9aIwH_dTTXDPwJPU8gNd9_ecfRSl70v7nLkPO1GvFaBX4bmpwYuKpxLkIzjVswCL0t37Gu_00XPx2hjAuu270YsGgFJNkia6iP1zo8X_rghjKeb7veTceUcQM3ViL7P4xHK4cJTkIz3GaMvlmYsiWoowqVKPbRBri4vlR-fCm9H-6OsbM1d3nQ_xKZ2hDF_Zd-ZmT6d_XyISHrZ3owvOwq5lKkbOzRRmPkF1q94i66Og8_1uzBER4ON01b7gFeyE0Qz7vYnejkJDyFh14qXS4YAd9LcZpmEVKO5m6ob1dfZ0cKRMZhABYqMLov-WiaWt2fsHu1GzIOZ7eg9lqN7Kkb7x62l4OTRrwevxrvqOyUQfiURgAF04JUH2y--j-CdL66cMOgUnjQndZXgpJBmMO3mB_XNhPKo7R3W9OAzBLmBHiAmyMUasszrq31S6Vr2bR6E0_oc63Dx6W6Q5DktrK-TT4U1jZrvjuel8hMLApsHgJf7GM_nMQm482Ubjbgfz-gCX-HZC5RIa63Y_mvoamrViRWuT73NbGtpdOmbFm8sJOI0Mlb3vYuAKkV_4-SkBGXXt0gLxf4iR2I0g8_-XPadeeGJTGf5P-cF8qkP43N21PWnZnemdkAF7_m0Q0lsEA9j8WE-A2A_DVzxO6EOw-aYiRHhu6AedPN0et0I0wRkGcJ562rz4=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram de Psicologas 3/5',
+  },
+  {
+    id: 4,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_F0lfulfda_1wLz-ol53O4HIYXjwUA-J10IaGtRPhGeSmt7HficXabtYy9_DCisL7yMnmOaATcwA3rO7_yjVYkf9ynpE21J9SeFZdRAbpbVIhQxUWN-9XzgFBznrb1uacow9Cul7pGTn3JexyFmL4wDFyoOhATZzJgdNDNe1iiYDKjHYXFBnOs_PMPVPe-gEITifRmA1rsUiFaYR985BoCe7Q17cWq_q4FIc3gIv97qLAY3EXZhdXZNGVZaOfyYcEV1xui4peK1AeieUIwlabZlJ7_TMSW1ueO_3i0TN4toIaJv-WdgRKWIDoerLrKbRMM6y5q_IWSXdnD2YIpl2zdV9WEXvja_QZ5pQXoYZYQeN4gy17rQwcX0gFmVcGnDWtVIExGWpcLsfKx9uphl4yiIZUWV7WK-WJaOwjMACz09HrsuxQW7mr-mdoY_Xd23uuyLpi9Az9sq0R9Y0Po0Hxe_0oqqxsGxRpexi_v8f25vTdEZARj_Pb_9aJomi7JbQ0aQFDl3MBme_3eeEbE2RF9fJnxQSHGd4Yn4X7RItZ0V6WdqUUp7Iy9dQf2bYYveoWzCmd96T0AaPvXMT6qGzqBMeUowIfyhPiKdEO6md63-mihIpWZIYNaKHXjr6BvZaC87xPbzHPzBwf0G-qf508ptFFX_C5dcWyriypzupBVK-b15PGsG5cqYMcMQUeGwUB5q-JPs6FlpcxWB52jCteHBMO8oY7qEs31QjWsZO-1ZsYkA4B52ZnIwbOPaU8BWr1LCwlbQb5tFftNF_a0S2vxq9HcFLeSH-gIaphof_RwWeYO9O0qA5Nq5q3c0b8AdGXG6BHAHpxTCL1ezKwRsiXoB8YMfONJC3X_bji6x7FRFbB2kVbkvXPaYbPpG7vsayH9mSzxeKmuYE_7hXnENmBP5fnUeXF0hMOEl0oo38ktHxOufqeI64Cb_NpQ59EG6_pjsbE37kWQiFxAr-c971BG1UjFDGMkt-c5asROGwGg3m8hnH6IFr1Zs2JZK77cQqwrh4ah2_qeplT75UzqbfgdWvla8d5YfoZ3cQ9H12o2t=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram de Psicologas 4/5',
+  },
+  {
+    id: 5,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_ERiYFq1_kNzJF_AgFon_S-zt1G7AR_4NWBgFJDiye096nqZ00Y16NCGS2IIDkuLL0_AWm13K7xJwCsnf1s-DMJiHmF6Pz0lTmX77Upo83j6WpKXR-Y3YjMKSHTbhmsAoD_ar_K24-5nhl5Bl4ibKR1F2-_-Y1kaFVGjcmoBQ8YkLwaTQuzMfPFa9dTuREdvJFovR0KYzRzuPJl5lcpqd9mF3ZkESTg5mieT1PQksOyKlJcAQ1QKxbeznBZWhs8ya3H-nos_VZfFqS0G7x-FC7OS9zISeGKhQf3mxRJdltcHYAGfNmrTItOQ0ni4MMxD1yomCrgrwZi8JzKeUEayyPOBwRm14_TPq0AnmlI8QuJm5BTy1oTPNDonwwUXpWiMnPHSOgI5Xcdp2g-8KyZeSVnxkORn8mDJd7gjR_JiuD0LaxmzxlfHtSfOP6pHPSuSPo2kl1gez3nkRPJxRaK8hdlN6zwRjcBf3gZpbrci1g2oWgwgeL9l3dCf3p641hjBUMvjwlJFR7qYcZjRjCn3M57NI8a-Ph7q7L9n3bUzUy9oergbmquEu2AqX7hvUWG7EADby3rnaNQu8kOMpf5MeZ8EEKeDJLbmZMUpw0NNcHegyOCfNNe5-P8M5FvkqqLPSovxIyKR1ctjpfZ0A7sVF3SX0dFeZnWTR-7sqX7DIG2zqFpi0tEgVF5nCA4n6zkGMJiAlmLI_fh8N7j3y9SVrmzAQqNrkA0e2cB-oEJLnFMmf1qdFbkcFqKtxDJUoRTgTyRS-Lx11fhqSV_Ky_jK2vgTlEM94sorNHNA7jIuSj6L1IGqGQC5CPhL8UmMx56ulJzFOT_0tApLAmrAwvBq1fHfV5j1_ecmkHrQ5wWZFKM_dFBRWJpx8xIz0rG_SQXLsVHTRnmiZr7bb74F917TXSFXSZmga4XpLV3m3q4LpyryLg4Yl2M148e7IDNlBOxiZQ5KYI0Lk3GGdvuaN3m8EnqLKibEiGJAadjVJeAupayutS-r58OoHgOjNNpP9QtTpJvULGooE2NuTpv4vAioAmmt5NPewfmgPUfa_tjhO2M=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram de Psicologas 5/5',
+  },
+  {
+    id: 6,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_GhMiDKz0g05wg8XKYlZIOAwDVBDrlHNBfuARFbAWaYjytCIDCYfXRKv_QWzQG2t7Z5gGNSyNrYMNcPR_d_eZVe7netRq_N1mkUpvRB73py-M687bJs8jGNqTMSl7CSeueQHDz70oyWve8wr5lLd1IZCY3Z_Vbv9JJTORAIpBwrD8FeRdtHjglzoUhiGFkxhZgq5A605nLUgDqM9zNp_YcwEv8MhFa-RSIPnsqJalc034BZj0ykWXm3Cqst1Ugxhot1BGIFlxtrcf6x8zVds0vC7-NMTGhKPJW1HbN6wIeeoYHjXDys3hD8u6l6CrIvJtIEt7saGKtNQ0VMGJ7FWjJSlnabcp_sEGOCfiYB6qYfrpPLLUJGbPdkShABQJ0XvQpUclOYm3zM3aetxJc2UtLqnxCwOUcuzgCe6xXrbKL75ZndjLW5j8aoywMhFVcbDFoIC1e-uetQwpVMzzwmbI8H2d2H9YiGOyhpBNgLDhj1jqzVoAtqA0-tA8UQde1jpE3n4_ESMd4RKNB_-vpqUg77RgR85rSeKAumCL703ZE-bl-dSM0_hixD2l407mr2BQAJ_qfMcHS2mb82S8L_qVWiSI1K2ge5WFAlolQ9BM-nkMUaAgAPesMCzCstRegxXUMVyRMOb9D-m_PeKoTvg8hrDYOZONtYoX-UGqkyiFaxdJyTmfYZhfoigWtV4_s3B4G7aNDgsi2abq0AwqP4H1f55BzKoESIta8jYMZpmtemmu5Ow7_LECmtdn-rUYSLbFe-DuHdnD2f1km4ZMSD30KROV_lo0guNnZ9B1HY-1AUvBSif_3FcZzL8u1RKl_LXP05J_KBrG2mMS5lcp7f3qPTIVFIp5l9z0I4OyWLWh-gp1K0oMgoGARxeP3UkDzSbsyKI2Et_ExsbxMjFcXcdOM2hf8CoCFIr09XJgZlWmKL2reoTOrFhp-VhBD-Zv6ajKeW2dgK_h9DuUCYu_El2ZjPW55U8FVbFh1U71_YPCh9yHlRnVmIePFhk53PzcRENwjIKpiu1lxX-i43qLivlOuidXWE0sq68-N8hbotjXiX=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Beneficio em ter uma Designer',
+  },
+  {
+    id: 7,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_G2Hxa0dFNR54wkh4n5eif30ZV_A9xTiBK1ty_mXltf9nTKq51AfnQYBnHaranmWKr1F_J45VeIfg6YjDvOkGzwloXNTjCtHHQabFE2d9i4U3OHa1bBmRGIdRRKmqdjB9lx5cQeeG1-FFLSis5O9h9GrNRAzgjn3JtguL5Hm15UNKYW36_hlKXRwgp-yXQkjQTfjX9WYNHLJGz88ZVeKzIqJCdLNQcKbW73I_XCCpwFp8zSrqOrOY7tD0wnotcqiMfoouNJFTd3f45VIgVDRvLSHWSc0lTLpZDKrveSmRI24Kk08tat-zAj5CLT2CZi1JL9IN0lS-G21ScHuAU66XwY4UE91aezD0iHAPApzYosejUMU97s1kDaRr2UxIHDiefTo4zMd8Eb7eDZR8j4JkdvmG5N0zFHNBeKIWm9R_miUkv2bMtfBDwFlO5Xs0pH01NaQ8RDXoaLh0miSQGuPvwf0ji3PheLs4ooEnlK5fAP2WZO4uPtRTryYfjEd7smiXhBxBNLkbX6OcogkDh4H37xP5Swc_q4fGCa_WTFxpNK_fq0BmXuhouw8eAJWj23pCNHQ1QiSKbWyQGsSxNRV5g46bx70MPC35Ku2EBWrrrUvJzN2Qlcluq2-QiUVDwtP39Wfk4Kn6FZzMfVqn0AF-5nB88y85PuGkonKjEiXNElRzeN1uSzkcMYOvgN_bCV3b8LRi-JrhsI5xNUag_FOByAgXwKRBwMskwTOia0BbdNdUXt88WSlD7zg8AP5cvgNhHPgtUzzBx-KF3Tv2wzkFRc7qSjOcZ0yTp7yAJfDFbnncFRKn_E6BPUEN6tLpkkGHXELCS6POUtqgxnAJ51_5RuNHFRSYB6SQtwihcg-mwCfJ20yeRXoVvUiw8vcwC8j3Ad_8V-ZBgNdI1fYP41osRhD7lSoGJyV3m8W82biV0OHJ0Uch-46kl3uK0Cx6R5enR8BQ3GyARaarxlMDAFgG3nwJ8_GhXl3cy4SgTCO8tyF_GtEO4XFPzxyorhRIcm3byuIKX4Ovwzd8uUFJxs39IoBNGEFWrgz73kcYYUSks=w1864-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Confeitaria 1/5',
+  },
+  {
+    id: 8,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_FZlSkosvNs0NSrLVLtjkksQOnO0Y0j3-_5MKFhBAnxUoUE09LFJ6bJBgygRyROMPMklj77f3hmCIIJgwsijsziGsQ0Sfn2Q6DdGr1q_hKRWMdaMIp_46S87qf36Zao2Yy7bMLxgSOmc9TRJK6rThbV8CLyh5x9ZFXBD00YX-GNK8u_CCtGBzY3Oq-rTBi1wSgWgKn6nXysiBsmfs6RmG_msrHQ7icO1O_I2V5QLOGMtvPTXI2qNlcPYycEz5Tbh_PqVIxKim113JteNU_ma1BjE8rxQuPsPRnQiKiueI3EITrSVoS-7ETV8aH5qGkSFe-MysHh089CtJpL4_WXJ3Ok7MiwyxtQfxTTC_B9Uh8almfCdl4pPym7FO441PTAESrR2HvODk6ahw726p1ZjRbP1BZklOcd2pkR71MpRgvggQAH8bcMRYagm3SCION8Bqfq0KDeGvZw-TsRSB4rbX6jsadQMmR3Ji7_Fhybq6xeS8VWZI8cXf_uVx30uNSmsqOf07_m8hA_MokobnpnnOj7K55bEIHv-22TDg9pNzNoctmyOcn51WxOAy89IjQ-evzjC0xLVpW2RbcnPjZ8-A6hReaYWno430wsPi2FmxYxPcgtw2kLzfAotPVIX2lUOtJ7L-bwx1DoE_kW76gfjZF6xasXhDvu0nwV_mB_DJRwmba6hTxkdYjr60CtG9re1qg55KmPBtKg5lUxUo1LNRhx0uHcuEraRXHS1M7VS_xUn7WKoDFcl-RvdD_8yo2r4FpbT4CgTLx1DRHFxj-YNhQlUTbeC-7viZ_bPNJ8VcbNM0iW6Uzc3qZWdjh2kcCCyDEd2HEveH067kMZYfKwTnFreHNypF5mSQMFYeRwZpj36K_B6w9DuDmJscAaEe8KxEKRz27d8Y489pO9Kj2gf5SimzfG4JBPSTayUbwyN1PJz_qStx7mER-nbiBP1pZmblR4z6fHVHm9mz0Sf0qjboP1vlgCw-JB9xx51pHJ0xBone7NVTSeib_q_v09kS9WQ3mWaeFf-luL5eUU4Kr0Vho6fYq9be459W_Lmkh7MJc=w1864-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Confeitaria 2/5',
+  },
+  {
+    id: 9,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_EmGvvLQKb1U9DnrBJSnn_gRVkl-2vPuGhouAZCNOhPmDw-XhE4kvAyPHjWdhoq6JixeQg4IccErAAzBrgU8D3SYcznn7l1qdTo8uYhg1d-1inNB06LklxYOvWLO8Ro8eNzc531X6-RjJ-IyqrqAa_hce_9FYrhVAzdc3DY8dxOQEEHzQR4pJ4RMapC44TNV_0xHuOeEcRn-ABd_JX-LhHPSZFUBnPxDNbf9R1EFGctMvcF65JQoMeFk0Q7eeeuuW13UAAiN5kMONn896038nb9uMYMjZ07egfzjk0hawDx09KA8c2LSlQrvSAqsCR-5HfHtuUgBveGcWhEfX7bmpko-x3ZYENVxBGOpUhCsEyQniofHc3E_rZEgV1sfaw7R_huRfeOOVG0hy0JLE_q7E5lr_d93RDaitqBpI__L2qOIoNShbxfJ7n8KqHVO2nEh4oROGNoy09rKLlRydMH0uS0udJNPQoH0PdFXQRQcV-uhRwsSxdAWM0Xi7-bz9bqXXeYWBALGdPgJzrUotOBFh_cjpMyIO-HD_HmaXV6vmEwtmhGMswImcGAH0uWuAYZ_5mM8ummb37KwqDjn8vLO3u0xuEmbC8h4Fur6zPnwObtmPNvmfv-Zo6rh3brD6JF2c8MFt5wlQQ52L4rJmh1d-kBjthHGjJVS22U42QhixE2uvPOh_WUusGtewX9vBV0jKlf015laNOGkOS4iMUDzvGuNvxE3WVuGhGpEvfAzpIy875i4uFU8d0SkIGZ8iqWbq3skneA2YKJFCcNxz5Y3iXLUYYmahIvPNpJ3JUD40LWbViwV1YUGBgwqVVV2W5937Kghw--yg-vu3_hbBb18w6Nsl2RyKOfx2nItF2ZInK_KRdc7AfwX5yIYKsh-p_ExtWyscbhjCxPPlfrVrTdRLS_9SeFTry2eWbSeyk_njalE7YVKqjddXfxYm-otgrZ35DqpjfV4hSgq4zNw0z-s9RtvldkHppllEKESwSGqe9R8uMTvPj32KIVm5Zuf4rRlQSpsxT9fZKzvXcmSyNvRx3pYWKlzDkgfrAgDa2hcsg=w1864-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Confeitaria 3/5',
+  },
+  {
+    id: 10,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_HWK4GJlAyAb__XIBN7pAdJi9uh5qQeu--BLHePEYikkboEbOpgwir1Jw2EJHoe7ZDzlw9sX9HcGxShJvomjWYMWtZ6iZAJdnjmDQ82ecFGCr0dPnareIC6Qn3Uim2Vasfq5EZQlsB8BR3tG_LgW26ULgC2HmgKdeC-dEQiE2wFuTvW_P5f6aeI8vs0B2FsQf9H-Vr94LbKuD5NIpHsWBkxBNwIYQbWkkIXoA05g83vo_3X1yOoRzLKBbZ2ScpmcWo80kADbb2QjXcePw1b2nMmD4aOKd_bDDZL9m9jjT6AFXB60EQKXG4dhJbRcOJOjoKue86bTlK0vCKdsQFdIyBNnu8upybdWfTdHZXJMMpZQGuLwZ5P0vcSqlU3Q_3bLxTBIRuk1y3_y3Quz-2ejdiWRhaSVUm3dZoL0i0YFpO8TBNcW2Z-wuXrgAyT0iESdw_IqP8zR5MpNCZb0PnNQ5ui0suRpdEoMmOMDHl9rR4MwyQlfvsCzjTvdWdm8jGKZDCRCkq8wdUuMJ_T-OR7S6AWkQKFKp7PuMlZZEyBOTVzvCDdPq2vAo02T-r4tRLAyT56rCLIInfkxf-S9ZIEq_N2yjRDOVwktgsyj6Y0CO4ysaSXen7izpXZCE7FkSx_NstWkcV30Ux2A7oEVAIVkQqIoFrAOMrbnt0I8kZKt7dmxQ8-1-Pa18kpkHx5w310yoCeBymSBvnU2NO01vsLhKmAdw8ewhS2lhmB-scChPnM97ePGJFi59E-Q75RmAeZVG59o7Cf5cs70Rc1KvihlMtd8rxduGpoXCybS9G0la4EfuGZMAgIYxlsm0bTblYy1Mem29h2VmG0hOZdfvte_L_XIb3PwtYXplhm13YontqjAGWU2lI04KOBQQxMl_qSUgnLPBVqL0rCRmMb4FekDGOer4vPy1GyylSYIFbY2To6v_yGP5aqzWlh0UB8aStkhFvAGoj_CpmWy7-aSJlUFDtLn4uG1qinlVAFWX4PwYqCo5BAfEyQp2MZzhXwtvdQ_ihddRA18zSlXajtj6sLBAYEznaKDNOz7G8LOvzQKKcW=w1864-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Confeitaria 4/5',
+  },
+  {
+    id: 11,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_G8IvziDP06-LcBKuEb_TRatIN6ZqiNMwZdCJcNg584oK1sRoX_zkMzAAdG_IYk-gqntaSP6ZtUT11KmeMybwJrkOvKaJsTzWLtYCrIWsUe5nPPcflTsu-hEZTxp3iS4TpQqveqAIYT5JshslAHf7ineAt5keXPcqVJGhDfFpOV04C0XhiKmMsKmS-fGOAOU68dDfZu2CMXtzI59Sq2NMFH1vmediiRql3pkKtSiwwjEs0TbnFPDBCKwOrACK4RCjJKxtGYw7qm21EDdwajBoKi_7IZdvdCaxoEvdU1OxQVYBIVPNt1-KPRwiy2VHdw-4WvSEAS81FwylUkCkvxuyEfu7pXMxoYBRJuYbuvhgFJ9AqoTHnNbLQwIVKiJsGMm2iKblW1XQdYq7jbpK8Zh0kKoNjPdPZvT1MBZR-mcIykJFNkEshtx1mv_Chu_8p_1QKy3q2DgKWnsKei7qadGVot2yfjkVZP0_Ri0MW2mvu7Xj2sPNnO6W_mQLXkPbBHuO6nnXSMgywE_FG6pEbDj9fJ3_-qBC4KrHbdThrlXEQ1n9ITLjP5o-PAwf1ovVKHAf4IECUfel03ZmuH79r8vW14QcVGk_HWqwg1zN6rkFZp3IVNHyWeRR0Ci28C71yEv43p1mwXbsmjfRQqlcRH9NeXefJG4byy51gqcCV_fWyjh2qU9_fpeYd82R5ez-m2cKlfyVnDNNw9Awxk-xE8llgvHFLqoWoPR6sO4_5TxaASj_I9Ty4FWRWJLNuwsgcBGWr0U3Pq5sUYdAH-rF4eiwTvRCeXgfYPqpOS00-g81Qb9s1EkQnDPiJrlELoTmY2iVIa7YMZft64PtJUOWcqMzBp_lZHLIlTcppKI-JnlFMpA0pSBksWOvHdtoBtuxNi5je6NG4_6ycCWHEZY1a8JnibwRekBcYkSlaPWVWNU7UOTtMt2YpJvsS0ZA0s-O6JSzEpdyA3wbECg6TYN3Vw1padXCl5orV_NM99CVFguNCD6GhUGzGrZzwosmUlsQf5UetpUuLPBb5NiEc1_D4j57bfARAIK8DvlvI47IY6p8pI=w1864-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Confeitaria 5/5',
+  },
+  {
+    id: 12,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_F5uexBmbieI2U9hq-ijHxfGuySHoJpcbKOPHUTlFN6b-qDVfrcyu63U4RDw9fVWHFEIcgagFs45wCM1h1W9HogMSE8zAQTA4n1snaKv_1ds-nbcDB1Aio9AxZK0QgIMc_k4XG6bcQWhGkQ6yk4O0rq9GrEYskoSgimretnEHBtDKPiZG4-k0ebZVwOQu8utoX9pAlBfAEUG0LlcfdgqdR2Mop-vLIfv9MgZnmknSNjNAaa7LjSasvmlU8UGbiKeqZPwoR74V8nuahNRniTl1G2z7qwHPpXF-M6qIT1pR-l2HenSkpm_KyfB7WBY9Xz2FSoh0PMiKVYU8ZQCkXEFppaDjzyxftMPn6R4cs1X8Ofzwcna9Dw-13ZYSp533uczZDb_6uxmhXGun7zHM37rELqtvNFt0veSqhd_PsJblHNm7BVaSWVpSQ6k0Sb5eymsV-L2H7xYZtVxYFZ97B8s040r2L9fYRh5qN1vcDnM7UEFw4WzlDbQpAUqvvmHbAE4yuO9r--YycUVsm5EvTtrw1K2FCv_UiXPhKZFTVjnuIVnCvpeqoru3pn6YDXgBW7zNCGnYWA4YCSe25Pz0NoGF2T04f4N04r8d8Bu0jV0CgflPmWUajTuZOysTVz9JF3KR4h1ZeLHx5PxawlOQMH9T5fE_sdlvqtCEY0RWGREugbj75whrI2Jd2edRf8maIhTiJUwIf4-NvASlpXl3tYfme_f1LRpPkoI2zxiEh2ZszzLb6TFJk7wbTt4BvZtl3GrqYnTflCC4ybDlnx8lConyRjbZT6VDHSUsdgZgeQv_iBkBA3UDc0McjOvzdd1rf_lVHsgF2A2N_eUviFj5iD7S7U9QrGrv-nwkkJn_wYO-OH9c3H5dnd1eaGrsf9VtehIsPzIg27YkmjpIPK-NBJYwrsX162JRtDhUE-6ocohKsuHhzLz2DuzrMFUX8yHST1Xh5hVSYOs4wn3Sw2dk11xI18XpnU20KKPqpuVagvvP3vTMrwpA6eK34EEMqAieOUkzUAp-dCMsxOdKM5cOpOU50EFff3eu9csYAWa1LfnmB7=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Arquitetura 1/6',
+  },
+  {
+    id: 13,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_Ei5BnI3VF0EZb7orZEo5GQPUyQ4CiU_bvm5FEj4e2uiHYIMJ6wYGAcrYiZivrdwYqWq_OvDWEpN9urHDDE_rxDmm32IojwMJ1-BnLcpiHkLBCRECMjwmdEXufXUkdXlmXCvP13l2TVsCq-YZHrvN2uBVcIIvSSclH4eK_dbbMHyNRA4kfUxd50dxHq_3wC7okLBaKCUBFtskeU_itSyxDMAhcQ9a4JU73rgseu9GgydeMSNOkwL3lDz3m40dzz76BBtEC3w9gKkTT6EhQtj_hHcPu1zk__DZxmZD421lYVQib8yFhi7M8DEgOQl0eAoJzs-w6HFidzpArCDo7O6ww7hoJJM69JbURCCQiocuFgTh3y0Xngipa9Zmw0huyveUvVsFAewOJp6LZn0TU2PNET-aotRoCpMLsaoo7i3gYEDlz18q88YkRyBHipl1fE6uqxw_u5T1_DCgy6MUWUR2iT_RJJ8w6ZsDv_k-Hc3c4qF7X7pFq8CelS0Z60OFQ5wraStsyNkvRrfnEahKTM9qPkt1yQ5bbKfqrowUbaXB05P5ksJzJuKWVGC2hWzDBtp_eXe6DyhzFnT3BRaCaB3ndYiQgwrZI7wweAXNrrtc1_cOmQh6723wMHDbTo571GIoLk3rAAfUItFxQIFcaTXCa_BP3BpKEEGGxbi8-RuK2PG37FpALeQFbdX8iCTg5dzCPHADqlLv7xHR-o8XXzcw23Q_orjQPN_8Dy9CXfMCv-RsUNx_DVbX8B2DZmvFcD5G1mn9iWEFlv22LwQWQE6yBlxDxrcTAyJweroT1yQ2H2K3_f2X77ACfpuTb2SJskqJiKhZnP1uOlEwyV6drRVTlnDVdNqfw0Eqfr2VDqN0Q-x7g10KU5mX519-1EKg9NosdwgxAjo6g8HnALfnqiHJXsEHDrfkVU2sFFecpZf9iQb8cP8Y2WAzwwMGudKB6AL6RHun7nSIIAQhlSWaoczCnGkioLOdYLLQj3pk4SmdaeAoILSuQDmLCI40bSKfoBmiGwRcMa8oCChHz27rGleE2KyJuCMYgKfc3xzyMlZchg=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Arquitetura 2/6',
+  },
+  {
+    id: 14,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_GbzKf2gaQSj1ay4toQrjvW0-1mNxL2c1EwOmM1ir9nbOdLKZjTCatxgPhB9F5QdLXpPE44C5dsT62hzAz_1BdittakBo7Q_qWwcWTZtm2a2m1z14ZbqgYVoRa8O2W1uaBCjXEx_ZF5O-lmVMzK4GuhOZxUGy56qLmkgB_VVM1sYQ3QAixAajsFXx9FLocWOeI6Gag8qY6eFm0Pe-RBvj5-D_3SgcrrAyzRnpHjbF-LPKdUwBDPs3et5CXd9JEDyn1rfjtQLqtjbN_l2yIc1GQvuB1SdbVW8MD75clczVprKGXXAYGE1snIMuKI7BACtzlw8Qy8TfIk5xYCfC-rwC85rNjtsYqUzTihsZFpD3E26BAG9RRWHlcmTHrmhVS8iVQyLXUplNNVezYvCtjQ7UDLC9VSY-8J-eifCelk7rDqk3UzEGpFf6kGueXIfH3pkjHOeKtMg-zt7R1fJoZxbAc5DWnybv6bsb2ZbqJLhm_K_bvEqheL-50Eegt_DgM7_7d_yiEBr1hJNHDUAoLkv2Q2dkJH1TdKfxI8gVZUu5ggEVzJnGFqkTKJTL4YZ6yYslnr1Eh2h0ViFFldihPg1F-hxCfG9RoAX0NUP6JQjkz5rnZMRNRi-kuMcHrsY4982-HHGYMCrASeP4YSGTkBD00CMFdmft9HS9qLtaQZ9YCUoKdj3MDgW7UYpQVDXqrmxyAL-go79qkvWV_UGan6HwlCbOkpicFHKM5cFhqxqGU34znvwpMfFvrijU2S3HatGirjAhq_Q23Sh402euiZxoybeu0x9A44syT05pSjjKtw_UN2w4LvDKCaWp6wmE-0gCRAsvgz5jOze1W2u-gdXR_P940tNSbUx9GVvlgYNwhCBtE2NEELQSPAWBz-GzXsawUVdGnovB4rLY0SXrt6a6mMkEmoTC9Su_rM6OkkJUu-MtgtrhSuLCZIEXNIsoJtwioQGD8KYKlgJZA1Hu4FhUNaHn08UikIJ7s-_FzAb9ZPwR1HSfsHYgzaciwriu6rmsRrCLI138xl3b1P26t_1I9uh1PJ8C8SuhaXudihk6yy=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Arquitetura 3/6',
+  },
+  {
+    id: 15,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_GMgHltbBD6cM9jggkc0LgUj6QKVwP3wcl1dI44RDc5XF524k-5OzCC7xjTALgTZb0x2kLemb7ssfqLoDSWMKk5xsb4klgv7jZ8bXGejiXT9TuXWwGD3OvhuseQ4bLYMLYF6eJnOPDPQbG6N4oTP09bPBpp4m5ACrdZ6K8DyMLAiKrlPfo7aWKAfK5fkdiIh4cH2tBS2ynkfD3qdjX9GNlN-ZD8uLzvEA4Th-WQqXR5UqddFNVFxGjimiQilc9-IGu9QNkGTuBI-zcMkMN4Xv9XHap1_lkg8pqWzDvAWEzdgxwHcCLoEgmMQ2wji4vHkRE-6CNhoWdxcCjbM5arF9nEOPoRpxGGBNnqPqju78BsuUzHmBplxPrYYUX5J6QBvgLZMZf_dZiRmgrDalrXVc8zyg7b5FQg0OB9HGidLZ0EAJ9uGqC2fMk1TpbhzEruiEl9iMUrPrJSqbRFDLb6b1P4H8ZPJbLIvS2dDyWe8Bpsdu_GLzZ17j5CsD0Zxym4dy1TIguWAPIibRQrKRaTQtH6BRfuUeujZPNFa6GzNUU5vRteG5xMQrfIJbZ-hZX3nTU7MkU-w85LtiT-uaZup3oqQwS7lsQrZWsFIgWbDtdftoiOeb5rGOS3PVWx-wRUHwxmhn7M1wZsjFpN6m7aW7RQfe9oHEM9G50WHYg3mSzWlWXb8AnGWVQY32kK_0t8IxhF65eYj0mRjwylVHZICx2-vIgBN-dwN6hm9tYR3QIbp3EDapTYsPMDhIh1qjbeIckfiCmQCefHcaMCHpTQHhQkXhtbt_gPeuHIYWL7_rb5RK2iiKQh587yO1qjUmgQUgOOafyAPB1iY5HfKdDx0xo8gfKU4BdmDiZWPVbrk2FVNTvXwEWg7HHzIKis7u1H26_JaM3MKNHR7qYcyaJ_57KCFl3gPZ_OooU8PnLmgcpDCU-UZsvAvJmaiCAzVRAjW2hW48rpA-NAJOaZj3iU5yQAOAMIxNPRqy5mrNp4mUPIxzjO44giAIaobYWQo-ufRvZPmaRY1WB0Il9R7UkjH8CC8g5JjiVAcXk5FAT2pqk=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Arquitetura 4/6',
+  },
+  {
+    id: 16,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_HGBfFPpeRSrS2sfxHSU2ziVZNnJnWlEVfnJc4FVY25PXQx4N_1lB1uOYwgrAFeHe3LSgIPbeU-fsVwjt5Jau3YbsN1eyryrOXHMt7XixAjwFFUCJa_IwgGlmRynYunTh6c7JJvK5d2H5pydjBgUsgfaBB2qSKezZ-Zc9-8Gucjb6o3KYVvdT6x-tgKeqtSjZHWs6O0N4thPTspM70v6IjHYXq9jX273m5UwA4nmvIvnmoSdntmwfscVSLN8kGdjJWqHUEIz_p6l_JA_0pOz7QRXM0H008oncI06Eu_XRxjEoEjQbqFCDgdgRWnZUotT3OJbWu5sy_KjHiJuIld9vv39YH0FvTDFljKnVyV1xnLAsyGeJ-OmN37d2ssmXKP8CXai5P87rrfkYpFcMt2zTKABMJMnUOV6STAgvjfG2M7SbJqG2PQ8o_FqFPOovGFwxvMy8CSJd3YUcn1S5kBjELKEklzHJmPF2XVLuIfM4zTvgReeMAN01MjUoCS-yRrunvfaBsyF_Kb4bW4cxcPxdUBxz7TMTwIhAZzeT6iG8T2wSuroHLUeZrnY3R2i_OOe3gwDiLSTu0f4OGXzzG6m-EIQKaR0bDU9LXZkRgCbSV1rsx-oGy0BB8Voprhj8GO4dBToD3PzTpgM9DlPRtOUV_efYr0pNYsxvz-FjQO98sUn_DYQMjGLYnL9n8znTwT8r3R6xUSC2yo3Ms_-zhE6K-DR4VJPPcEnj_aXGKxz-Q0gLQDZqTbAjWNcvCqUYh5-SzxT8nK6S8aKpebNY-W1pwAjj5z3SLPrW-4yFAAECnLFbsjOiP7YrtZGpxN5pWmNIMGmQT-hcoSjvRteJXy7Tq9jL4bFbI_1bts9eK3CUK2L8mA_IDvDtaFPhcJ2Z1JuQrvymq8-sqXZaXn-_krrlffUUDrcUGV9iGJi2VUYIZ4QzG41yh7DC1CAVzVDFIv99lSyV9qxUk-qNXGrgYURmZzdN3KE7AIe8TUR0NG6OcZ0TzMCqNBz-N3BbmRTqawHfPltJYzy3YXVrC8La6eIiXCCgHkug2Oohnca2FDup4=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Arquitetura 5/6',
+  },
+  {
+    id: 17,
+    img: 'https://lh3.googleusercontent.com/rd-d/ALs6j_FkCwRt9dt_Xiz8LYnGIfB8KUagtis7EFVbD3Wj1rbxeHIJ9W76nFOhTKDHXOk7y20R9XMvPtdjI4ORthCT2kNEJVFizpLGf4-cdir0zqRRDcMW95cRwvokDfYL6tpA1gZ_21cE-vTlMYMzhyLUIHyfc8ncTbt8aq6taDQYL7UTsAB0NBPuv2g9tKtHvPytvTXj0smkd6ixJ9D1MSHz8PNlm3S06HhCbl4HXAQpVS6sGFC9J8aZgieAXzY6M461G985zIB-cBZTNgwYapa5bMImCUgeUI1ss-Jzfe7WRKwCX2AYWPtA2Te1SkRxqTtSozvx7ZUjRO4QJ7EwJNJZ2nxckrPZNWfq0W1uJRKZQ33o3z1YUEuBJ3KBwlmwcSvgbc6kJYIEHM6T6M-gizl6kJCjPVzTr4lAT48VfFhG1jGFIv62a_d3NpSA_GGlIFag8iHdQ5e1E5a48230rVRyVTLd1vbMYVSWJNosnNjYrnNtec0eSgGxygXIewAn3p3Hp2iTqc8_z65zfbcFdNB5OcVWkhvMpRNWapN9n0akQ18-wNlscQw0grOMS7DC8dnCn1gp6j3SlKBT-mCMWFQkkTIe6lg-3HmsSFK-8uCvQKpjAcnnIPc8EH41j2ckex0uy1AIF4xyXNdP6f-KPswELUGuU96AsvDqMG4MQpHla_Sc6SytOBRoBET8Imj2LY6EwOH9shBtS-7SMF6FcXU-W56NRHb9mYsXhW9wH085icsaE3DzUeqQqLJA7Lza9HLj7oUNq7pRgdobGLrR6LLURIdLcbrcHrLBnFwDTb84KXN18yd-sUzbnMdWRtFBZvAGZU6jlJiDvuWDUxb52ZojzNW0mIqQwTEOkE3GhV29LsVBiZpydM4QS2ouQfx_nC1lzw155sI_wsoTTWBGGXMFv--grVuRmXquinmN4HJM7RzEqoIZ1aUbAxxdYyFVXBVerg8NUvhbPAKp7NU5pcLAVOyIOpXb0e7CdK8l797xWstkuyWZd86Ukc68pUTsuCRj3Tx0S1VPcVk8mnBmvFy6MlNnyKO_rtEC6or3TjU3lFk=w1537-h916?auditContext=forDisplay',
+    caption: 'Posts para Instagram Arquitetura 6/6',
+  },
+];
+
+
+export default function InstagramCarouselSection() {
+  const [swiper, setSwiper] = useState(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <section id="designs-rede-social" className="py-20 bg-white overflow-hidden">
+      {/* Header */}
+      <CarouselHeader />
+
+      {/* Carousel wrapper — largura total, peek nas laterais */}
+      <div className="relative w-full">
+        {/* Fade lateral esquerda */}
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-10 md:w-16 z-10 bg-gradient-to-r from-white/50 to-transparent" />
+        {/* Fade lateral direita */}
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-10 md:w-16 z-10 bg-gradient-to-l from-white/50 to-transparent" />
+
+        {!mounted ? (
+          <CarouselSkeleton posts={POSTS} />
+        ) : (
+          <Swiper
+            modules={[Autoplay]}
+            onSwiper={setSwiper}
+            loop={true}
+            centeredSlides={false}
+            style={{ overflow: 'visible' }}
+            autoplay={{
+              delay: 1750,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            breakpoints={{
+              0:    { slidesPerView: 1.3,  spaceBetween: 12 },
+              480:  { slidesPerView: 1.8,  spaceBetween: 14 },
+              768:  { slidesPerView: 2.5,  spaceBetween: 16 },
+              1024: { slidesPerView: 3.4,  spaceBetween: 20 },
+              1280: { slidesPerView: 4.2,  spaceBetween: 20 },
+            }}
+          >
+            {POSTS.map((post) => (
+              <SwiperSlide key={post.id}>
+                <CarouselSlide post={post} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+
+        {/* Setas — só renderizadas após hidratação */}
+        {mounted && <CarouselNavButton direction="prev" onClick={() => swiper?.slidePrev()} />}
+        {mounted && <CarouselNavButton direction="next" onClick={() => swiper?.slideNext()} />}
+      </div>
+    </section>
+  );
+}
