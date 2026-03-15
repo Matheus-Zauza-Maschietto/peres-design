@@ -1,4 +1,4 @@
-import { socialMediaService } from '../../services/SocialMediaService';
+import { socialMediaService } from '../../services/SocialMediaService.js';
 import ContactHeader from './Components/ContactHeader';
 import ContactCard from './Components/ContactCard';
 

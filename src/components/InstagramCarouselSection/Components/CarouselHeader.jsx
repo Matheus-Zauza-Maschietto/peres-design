@@ -1,4 +1,4 @@
-import { socialMediaService } from '../../../services/SocialMediaService';
+import { socialMediaService } from '../../../services/SocialMediaService.js';
 
 export default function CarouselHeader() {
   return (

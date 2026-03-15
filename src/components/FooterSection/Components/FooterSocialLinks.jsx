@@ -1,4 +1,4 @@
-import { socialMediaService } from '../../../services/SocialMediaService';
+import { socialMediaService } from '../../../services/SocialMediaService.js';
 
 const { instagram, behance, whatsapp } = socialMediaService;
 
