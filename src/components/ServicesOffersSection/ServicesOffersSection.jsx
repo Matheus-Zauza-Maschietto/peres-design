@@ -42,7 +42,7 @@ export default function ServicesOffersSection() {
   return (
     <section
       id="ofertas"
-      className="w-full py-20 md:py-28 px-6 md:px-12 lg:px-24 bg-white"
+      className="section-block px-6 md:px-12 lg:px-24"
       aria-labelledby="services-heading"
     >
       <ServicesSectionHeader />

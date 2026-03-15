@@ -59,6 +59,12 @@ img {
   display: block;
 }
 
+@layer components {
+  .section-block {
+    @apply w-full bg-white py-8 md:py-4;
+  }
+}
+
 .hero-social-link {
   color: var(--color-primary-1);
   transition: color 0.3s ease, transform 0.3s ease;

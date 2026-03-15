@@ -1,11 +1,11 @@
 import SectionLabel from "./Components/SectionLabel";
 import DesignerPhoto from "./Components/DesignerPhoto";
 import DecorativeDivider from "./Components/DecorativeDivider";
-import DesignerStats from "./Components/DesignerStats";
+import DesignerQuote from "./Components/DesignerStats";
 
 export default function AboutDesignerSection() {
   return (
-    <section id="sobre" aria-label="Sobre mim" className="w-full py-24 bg-white overflow-hidden">
+    <section id="sobre" aria-label="Sobre mim" className="section-block overflow-hidden">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-stretch">
 
         {/* Coluna da Imagem */}
@@ -61,7 +61,7 @@ export default function AboutDesignerSection() {
           <DecorativeDivider />
 
           {/* Métricas */}
-          <DesignerStats />
+          <DesignerQuote />
         </div>
 
       </div>

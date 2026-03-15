@@ -64,7 +64,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="w-full py-24 px-6 bg-white">
+    <section id="faq" className="section-block px-6 md:px-12 lg:px-24">
       <div className="max-w-2xl mx-auto">
 
         <FaqHeader />

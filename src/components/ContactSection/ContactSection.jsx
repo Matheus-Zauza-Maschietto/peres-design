@@ -39,7 +39,7 @@ export default function ContactSection() {
     <section
       id="contato"
       aria-label="Contato"
-      className="w-full bg-white py-24 px-6 md:px-16 lg:px-32"
+      className="section-block px-6 md:px-12 lg:px-24"
     >
       <ContactHeader />
 

@@ -12,7 +12,7 @@ export default function App() {
   return (
     <div className="bg-white text-black">
       <Header />
-      <main className="pt-20">
+      <main className="pt-10">
         <HeroSection />
         <PortfolioGallerySection />
         <InstagramCarouselSection />

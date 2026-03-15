@@ -105,7 +105,7 @@ export default function InstagramCarouselSection() {
   }, []);
 
   return (
-    <section id="designs-rede-social" className="py-20 bg-white overflow-hidden">
+    <section id="designs-rede-social" className="section-block overflow-hidden">
       {/* Header */}
       <CarouselHeader />
 

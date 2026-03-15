@@ -29,7 +29,7 @@ const projects = [
 
 export default function PortfolioGallerySection() {
   return (
-    <section id="galeria" className="w-full py-20 px-6 bg-white">
+    <section id="galeria" className="section-block px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto">
 
         {/* Cabeçalho da seção */}

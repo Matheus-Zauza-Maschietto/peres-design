@@ -1,28 +1,13 @@
-const stats = [
-  { value: "+5",   label: "Anos de experiência" },
-  { value: "+80",  label: "Projetos entregues" },
-  { value: "100%", label: "Clientes satisfeitos" },
-];
-
-export default function DesignerStats() {
+export default function DesignerQuote() {
   return (
-    <div className="flex gap-12">
-      {stats.map(({ value, label }) => (
-        <div key={label}>
-          <p
-            className="text-4xl font-extralight text-black"
-            style={{ fontFamily: "var(--font-serif)" }}
-          >
-            {value}
-          </p>
-          <p
-            className="text-[0.65rem] uppercase tracking-[0.2em] mt-1.5"
-            style={{ color: "var(--color-neutral)" }}
-          >
-            {label}
-          </p>
-        </div>
-      ))}
-    </div>
+    <blockquote
+      className="border-l-2 pl-6 italic text-lg font-light leading-relaxed text-black"
+      style={{ fontFamily: "var(--font-serif)", borderColor: "var(--color-primary-2)" }}
+    >
+      Mais do que design, meu trabalho é transformar ideias em identidades que fazem marcas serem vistas e lembradas com
+      {" "}<span style={{ color: "var(--color-primary-1)" }}>presença</span>,{" "}
+      <span style={{ color: "var(--color-primary-2)" }}>personalidade</span> e{" "}
+      <span style={{ color: "var(--color-neutral)" }}>propósito</span>.
+    </blockquote>
   );
 }
