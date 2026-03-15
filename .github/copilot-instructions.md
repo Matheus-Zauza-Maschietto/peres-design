@@ -1,7 +1,7 @@
 # Peres Design — Copilot Workspace Instructions
 
 ## Project Overview
-Portfolio landing page for **Peres Design**, a graphic design / branding / visual identity specialist.
+Portfolio landing page for **Peres Design**, a graphic design / social media designs / visual identity specialist.
 Single-page React app, fully in **Brazilian Portuguese**.
 
 ## Tech Stack

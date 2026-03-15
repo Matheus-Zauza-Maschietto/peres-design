@@ -10,7 +10,7 @@ export default function ContactHeader() {
       </h2>
       <p className="text-neutral text-base md:text-lg font-light">
         Escolha o canal que preferir. Estou disponível para novos projetos de
-        branding e identidade visual.
+        identidade visual e designs para redes sociais.
       </p>
     </div>
   );

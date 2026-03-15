@@ -6,7 +6,7 @@ const faqs = [
   {
     question: 'Quais serviços você oferece?',
     answer:
-      'Trabalho com branding, identidade visual e design para redes sociais, ajudando marcas a se posicionarem de forma estratégica e profissional.',
+      'Trabalho com identidade visual, designs para redes sociais e design gráfico, ajudando marcas a se posicionarem de forma estratégica e profissional.',
   },
   {
     question: 'Para quem é o serviço de identidade visual?',
@@ -14,7 +14,7 @@ const faqs = [
       'Para empresas e profissionais que desejam posicionar sua marca com mais profissionalismo, estratégia e consistência visual.',
   },
   {
-    question: 'Quanto tempo leva um projeto de identidade visual ou branding?',
+    question: 'Quanto tempo leva um projeto de identidade visual?',
     answer:
       'O prazo médio é de 20 a 30 dias úteis, podendo variar conforme a complexidade do projeto e o tempo de retorno nos feedbacks.',
   },

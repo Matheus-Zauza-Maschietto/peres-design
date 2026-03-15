@@ -5,7 +5,7 @@ export default function CarouselSlide({ post }) {
       <div className="aspect-[4/5] w-full">
         <img
           src={post.img}
-          alt={`${post.caption} — Peres Design | Design Gráfico e Branding`}
+          alt={`${post.caption} — Peres Design | Design Gráfico, Identidade Visual e Designs para Redes Sociais`}
           loading="lazy"
           width="600"
           height="750"

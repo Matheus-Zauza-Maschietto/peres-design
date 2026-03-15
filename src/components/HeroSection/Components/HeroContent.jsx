@@ -41,7 +41,7 @@ export default function HeroContent() {
           color: 'var(--color-neutral)',
         }}
       >
-        Design Gráfico, Branding &amp; Identidade Visual
+        Design Gráfico, Identidade Visual &amp; Designs para Redes Sociais
       </p>
 
       <HeroSocialLinks />

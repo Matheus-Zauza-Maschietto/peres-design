@@ -34,7 +34,7 @@ export default function AboutDesignerSection() {
               className="text-sm font-medium mt-3 tracking-wide"
               style={{ color: "var(--color-primary-2)" }}
             >
-              Design Gráfico · Branding · Identidade Visual
+              Design Gráfico · Designs para Redes Sociais · Identidade Visual
             </p>
           </div>
 
@@ -50,7 +50,7 @@ export default function AboutDesignerSection() {
               reais para quem empreende.
             </p>
             <p>
-              Atuo em Design Gráfico, Branding e Identidade Visual — criando a
+              Atuo em Design Gráfico, Designs para Redes Sociais e Identidade Visual — criando a
               construção de marca do zero até peças gráficas, materiais institucionais e apresentações
               visuais. Cada entrega é desenvolvida com olhar estratégico, atenção aos detalhes e
               total dedicação à visão de quem empreende.

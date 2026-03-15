@@ -5,7 +5,7 @@ export default function FooterBrand() {
         Peres Design
       </span>
       <p className="text-sm leading-relaxed" style={{ color: "var(--color-neutral)" }}>
-        Design Gráfico, Branding e Identidade Visual criados com
+        Design Gráfico, Identidade Visual e Designs para Redes Sociais criados com
         intenção, estética e estratégia.
       </p>
     </div>
