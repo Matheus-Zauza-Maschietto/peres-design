@@ -12,7 +12,7 @@ class SocialMediaService {
     icon: "fa-brands fa-whatsapp",
     label: "WhatsApp",
     buildUrl(packageName) {
-      const message = `Olá gostaria de saber mais sobre o pacote ${packageName}`;
+      const message = `Olá, gostaria de saber mais sobre o pacote ${packageName}.`;
       return `https://wa.me/${this.number}?text=${encodeURIComponent(message)}`;
     },
   };
