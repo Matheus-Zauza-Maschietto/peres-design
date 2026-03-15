@@ -54,7 +54,6 @@ img {
   display: block;
 }
 
-/* ── Hero social icons ─────────────────────────────────── */
 .hero-social-link {
   color: var(--color-primary-1);
   transition: color 0.3s ease, transform 0.3s ease;

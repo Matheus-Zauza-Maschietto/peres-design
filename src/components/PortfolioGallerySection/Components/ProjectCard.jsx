@@ -6,6 +6,21 @@ export default function ProjectCard({ title, category, image }) {
         aria-label={`Ver projeto ${title}`}
         className="group block cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary1 rounded-2xl"
       >
+        {/* Stack effect wrapper */}
+        <div className="relative">
+          {/* Camada traseira da stack */}
+          <div
+            className="absolute inset-0 rounded-2xl rotate-1 translate-y-1 transition-transform duration-500 ease-out group-hover:rotate-3 group-hover:translate-y-4 group-hover:translate-x-2"
+            style={{ backgroundColor: "var(--color-primary-2)", opacity: 0.4 }}
+            aria-hidden="true"
+          />
+          {/* Camada do meio da stack */}
+          <div
+            className="absolute inset-0 rounded-2xl transition-transform duration-500 ease-out group-hover:-rotate-1 group-hover:translate-y-2 group-hover:-translate-x-1"
+            style={{ backgroundColor: "var(--color-primary-1)", opacity: 0.35 }}
+            aria-hidden="true"
+          />
+
         {/* Container da imagem com efeito hover */}
         <div className="relative overflow-hidden aspect-video rounded-2xl shadow-sm transition-shadow duration-500 group-hover:shadow-lg">
           <img
@@ -33,6 +48,7 @@ export default function ProjectCard({ title, category, image }) {
             </span>
           </div>
         </div>
+        </div>{/* fim stack wrapper */}
 
         {/* Informações do card abaixo da imagem */}
         <div className="pt-4 pb-2 px-1">
