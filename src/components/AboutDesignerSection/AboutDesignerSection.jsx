@@ -1,7 +1,7 @@
 import SectionLabel from "./Components/SectionLabel";
 import DesignerPhoto from "./Components/DesignerPhoto";
 import DecorativeDivider from "./Components/DecorativeDivider";
-import DesignerQuote from "./Components/DesignerStats";
+import DesignerQuote from "./Components/DesignerQuote";
 
 export default function AboutDesignerSection() {
   return (
@@ -50,10 +50,10 @@ export default function AboutDesignerSection() {
               reais para quem empreende.
             </p>
             <p>
-              Com mais de 5 anos de experiência em Design Gráfico, Branding e Identidade Visual,
-              já ajudei mais de 80 negócios a encontrarem o seu visual único — de pequenos
-              empreendedores a marcas consolidadas. Cada projeto é desenvolvido com olhar estratégico,
-              atenção aos detalhes e total dedicação à visão do cliente.
+              Atuo em Design Gráfico, Branding e Identidade Visual — criando a
+              construção de marca do zero até peças gráficas, materiais institucionais e apresentações
+              visuais. Cada entrega é desenvolvida com olhar estratégico, atenção aos detalhes e
+              total dedicação à visão de quem empreende.
             </p>
           </div>
 

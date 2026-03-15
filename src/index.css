@@ -61,7 +61,7 @@ img {
 
 @layer components {
   .section-block {
-    @apply w-full bg-white py-8 md:py-4;
+    @apply w-full bg-white py-8 md:py-16;
   }
 }
 
