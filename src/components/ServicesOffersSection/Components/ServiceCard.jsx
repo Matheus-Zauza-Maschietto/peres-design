@@ -15,6 +15,13 @@ const accentClasses = {
     bullet: "bg-primary2",
     button: "bg-primary2 text-white",
   },
+  black: {
+    border: "border-black",
+    tag: "bg-black text-white",
+    divider: "bg-black",
+    bullet: "bg-black",
+    button: "bg-black text-white",
+  },
 };
 
 function buildWhatsAppUrl(packageName) {
@@ -26,9 +33,22 @@ export default function ServiceCard({ service }) {
 
   return (
     <article
-      className={`flex flex-col border ${cls.border} rounded-2xl p-8 md:p-10 bg-white`}
+      className={`relative flex flex-col border ${cls.border} rounded-2xl p-8 md:p-10 bg-white`}
       aria-labelledby={`service-title-${service.id}`}
     >
+      {/* Badge "Novo" com indicador pulsante */}
+      {service.isNew && (
+        <div
+          className="absolute -top-3.5 right-5 flex items-center gap-2 bg-black text-white text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full"
+          aria-label="Serviço novo"
+        >
+          <span className="relative flex h-2 w-2" aria-hidden="true">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary2 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary2" />
+          </span>
+          Novo
+        </div>
+      )}
       {/* Tag de destaque */}
       <span
         className={`self-start text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-6 ${cls.tag}`}

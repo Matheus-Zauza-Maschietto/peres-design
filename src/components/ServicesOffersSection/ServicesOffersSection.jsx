@@ -36,6 +36,24 @@ const services = [
     accent: "primary2",
     ctaLabel: "Quero designs para minhas redes sociais",
   },
+  {
+    id: "landing-page",
+    tag: "Lançamento",
+    isNew: true,
+    title: "Landing Page",
+    description:
+      "Uma página de alta conversão que apresenta sua marca, serviço ou produto de forma estratégica. Design elegante, responsivo e focado em transformar visitantes em clientes.",
+    deliverables: [
+      "Layout exclusivo e responsivo",
+      "Seções que se adequam ao seu conteúdo",
+      "Tipografia e cores da sua marca",
+      "Otimização para dispositivos móveis",
+      "Entrega dos arquivos finais & código-fonte",
+    ],
+    price: "A partir de R$ 599,90",
+    accent: "black",
+    ctaLabel: "Quero minha Landing Page",
+  },
 ];
 
 export default function ServicesOffersSection() {
@@ -47,7 +65,7 @@ export default function ServicesOffersSection() {
     >
       <ServicesSectionHeader />
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}
