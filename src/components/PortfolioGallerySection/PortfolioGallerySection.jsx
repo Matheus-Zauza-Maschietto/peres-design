@@ -1,4 +1,6 @@
+import { useState } from "react";
 import ProjectCard from "./Components/ProjectCard";
+import ProjectSidebar from "./Components/ProjectSidebar";
 
 const projects = [
   {
@@ -28,6 +30,8 @@ const projects = [
 ];
 
 export default function PortfolioGallerySection() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   return (
     <section id="galeria" className="section-block px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto">
@@ -53,10 +57,13 @@ export default function PortfolioGallerySection() {
               title={project.title}
               category={project.category}
               image={project.image}
+              onClick={() => setSelectedProject(project)}
             />
           ))}
         </ul>
       </div>
+
+      <ProjectSidebar project={selectedProject} onClose={() => setSelectedProject(null)} />
     </section>
   );
 }

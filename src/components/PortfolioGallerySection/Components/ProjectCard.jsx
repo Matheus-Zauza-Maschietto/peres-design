@@ -1,10 +1,11 @@
-export default function ProjectCard({ title, category, image }) {
+export default function ProjectCard({ title, category, image, onClick }) {
   return (
     <li>
       <a
         href="#"
         aria-label={`Ver projeto ${title}`}
         className="group block cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary1 rounded-2xl"
+        onClick={(e) => { e.preventDefault(); onClick?.(); }}
       >
         {/* Stack effect wrapper */}
         <div className="relative">
