@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function ProjectSidebar({ project, onClose, children }) {
+export default function ProjectSidebar({ project, onClose }) {
   const isOpen = Boolean(project);
 
   useEffect(() => {
@@ -49,7 +49,37 @@ export default function ProjectSidebar({ project, onClose, children }) {
           <i className="fa-solid fa-xmark text-lg" aria-hidden="true" />
         </button>
 
-        {children}
+        <div className="h-full overflow-y-auto px-6 pt-16 pb-8 md:px-8">
+          {project && (
+            <div className="mx-auto max-w-3xl">
+              <h3 className="text-2xl md:text-3xl font-light tracking-tight text-black">
+                {project.title}
+              </h3>
+
+              <div className="mt-8 space-y-4">
+                {(project.imageMatrix || []).map((row, rowIndex) => (
+                  <div
+                    key={`row-${rowIndex}`}
+                    className="grid gap-4"
+                    style={{
+                      gridTemplateColumns: `repeat(${Math.max(row.length, 1)}, minmax(0, 1fr))`,
+                    }}
+                  >
+                    {row.map((imageUrl, columnIndex) => (
+                      <img
+                        key={`image-${rowIndex}-${columnIndex}`}
+                        src={imageUrl}
+                        alt={`${project.title} - imagem ${rowIndex + 1}.${columnIndex + 1}`}
+                        className="w-full h-auto object-cover"
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </aside>
     </>
   );
