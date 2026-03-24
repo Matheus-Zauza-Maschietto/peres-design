@@ -15,7 +15,7 @@ const services = [
       "Manual de uso da marca (brandbook)",
       "Aplicações em mockups reais",
     ],
-    price: "A partir de R$ 890,00",
+    price: "A partir de R$ 890,90",
     accent: "primary1",
     ctaLabel: "Quero minha Identidade Visual",
   },
