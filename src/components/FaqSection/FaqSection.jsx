@@ -7,11 +7,17 @@ const faqs = [
     question: 'Quais serviços você oferece?',
     answer:
       'Trabalho com identidade visual, designs para redes sociais e design gráfico, ajudando marcas a se posicionarem de forma estratégica e profissional.',
+    externalLinks: [
+      { label: 'Behance — explore portfólios de design gráfico', href: 'https://www.behance.net/search/projects?field=graphic-design' },
+    ],
   },
   {
     question: 'Para quem é o serviço de identidade visual?',
     answer:
       'Para empresas e profissionais que desejam posicionar sua marca com mais profissionalismo, estratégia e consistência visual.',
+    externalLinks: [
+      { label: 'O que é Identidade Visual — Sebrae', href: 'https://ebaconline.com.br/blog/identidade-visual-seo' },
+    ],
   },
   {
     question: 'Quanto tempo leva um projeto de identidade visual?',
@@ -38,6 +44,11 @@ const faqs = [
     question: 'Você também cria artes para redes sociais?',
     answer:
       'Sim! Desenvolvo designs estratégicos para posts, como carrosséis, capas, templates e materiais visuais para fortalecer a presença da marca nas redes.',
+    externalLinks: [
+      { label: 'Instagram para Empresas', href: 'https://business.instagram.com/' },
+      { label: 'LinkedIn Marketing Solutions', href: 'https://business.linkedin.com/marketing-solutions' },
+      { label: 'Canva para Times', href: 'https://www.canva.com/teams/' },
+    ],
   },
   {
     question: 'Posso pedir alterações no projeto?',
