@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://peresdesign.com.br/sitemap.xml
+Sitemap: https://peresdesigns.com.br/sitemap.xml
