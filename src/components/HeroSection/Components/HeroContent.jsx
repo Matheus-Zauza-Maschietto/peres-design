@@ -8,16 +8,17 @@ export default function HeroContent() {
         className="text-xs tracking-[0.45em] uppercase"
         style={{
           fontFamily: 'var(--font-sans)',
-          color: 'var(--color-neutral)',
+          color: 'var(--color-white)',
         }}
       >
         Portfólio
       </span>
 
       <h1
-        className="text-5xl sm:text-7xl md:text-8xl font-light leading-none text-black"
+        className="text-5xl sm:text-7xl md:text-8xl font-light leading-none"
         style={{
           fontFamily: 'var(--font-serif)',
+          color: 'var(--color-white)',
           letterSpacing: '0.12em',
         }}
       >
@@ -34,7 +35,7 @@ export default function HeroContent() {
         className="text-xs sm:text-sm tracking-[0.28em] uppercase leading-relaxed"
         style={{
           fontFamily: 'var(--font-sans)',
-          color: 'var(--color-neutral)',
+          color: 'var(--color-white)',
         }}
       >
         Design Gráfico, Identidade Visual &amp; Designs para Redes Sociais

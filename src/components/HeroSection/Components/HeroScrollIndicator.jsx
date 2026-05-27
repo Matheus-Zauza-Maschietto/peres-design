@@ -8,14 +8,14 @@ export default function HeroScrollIndicator() {
         className="text-xs tracking-[0.3em] uppercase"
         style={{
           fontFamily: 'var(--font-sans)',
-          color: 'var(--color-neutral)',
+          color: 'var(--color-white)',
         }}
       >
         scroll
       </span>
       <div
         className="w-px h-8"
-        style={{ backgroundColor: 'var(--color-primary-1)' }}
+        style={{ backgroundColor: 'var(--color-white)' }}
       />
     </div>
   );

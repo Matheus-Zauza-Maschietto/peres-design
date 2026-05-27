@@ -85,22 +85,24 @@ export default function ServiceCard({ service }) {
         ))}
       </ul>
 
-      {/* Preço */}
-      <p className="text-xs uppercase tracking-widest text-neutral mb-1">
-        Investimento
-      </p>
-      <p className="text-2xl font-semibold text-black mb-8">{service.price}</p>
-
-      {/* CTA */}
-      <a
-        href={buildWhatsAppUrl(service.title)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`mt-auto w-full text-center text-sm font-semibold tracking-wide py-4 px-6 rounded-xl transition-opacity duration-200 hover:opacity-90 ${cls.button}`}
-        aria-label={`${service.ctaLabel} — abre no WhatsApp`}
-      >
-        {service.ctaLabel}
-      </a>
+    
+      <div className='mt-auto flex flex-col justify-evenly h-36'>
+        {/* Preço */}
+        <p className="mt-auto text-xs uppercase tracking-widest text-neutral mb-1">
+          Investimento
+        </p>
+        <p className="text-2xl font-semibold text-black mb-8">{service.price}</p>
+        {/* CTA */}
+        <a
+          href={buildWhatsAppUrl(service.title)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`mt-auto w-full text-center text-sm font-semibold tracking-wide py-4 px-6 rounded-xl transition-opacity duration-200 hover:opacity-90 ${cls.button}`}
+          aria-label={`${service.ctaLabel} — abre no WhatsApp`}
+        >
+          {service.ctaLabel}
+        </a>
+      </div>
     </article>
   );
 }
