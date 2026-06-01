@@ -1,26 +1,19 @@
 import { socialMediaService } from '../../../services/SocialMediaService.js';
 
-const accentClasses = {
+const accentStyles = {
   primary1: {
-    border: "border-primary1",
-    tag: "bg-primary1 text-white",
-    divider: "bg-primary1",
-    bullet: "bg-primary1",
-    button: "bg-primary1 text-white",
+    border: { borderColor: 'var(--color-primary-1)' },
+    tag: { backgroundColor: 'var(--color-primary-1)', color: 'var(--color-white)' },
+    divider: { backgroundColor: 'var(--color-primary-1)' },
+    bullet: { backgroundColor: 'var(--color-primary-1)' },
+    button: { backgroundColor: 'var(--color-primary-1)', color: 'var(--color-white)' },
   },
   primary2: {
-    border: "border-primary2",
-    tag: "bg-primary2 text-white",
-    divider: "bg-primary2",
-    bullet: "bg-primary2",
-    button: "bg-primary2 text-white",
-  },
-  black: {
-    border: "border-black",
-    tag: "bg-black text-white",
-    divider: "bg-black",
-    bullet: "bg-black",
-    button: "bg-black text-white",
+    border: { borderColor: 'var(--color-primary-2)' },
+    tag: { backgroundColor: 'var(--color-primary-2)', color: 'var(--color-white)' },
+    divider: { backgroundColor: 'var(--color-primary-2)' },
+    bullet: { backgroundColor: 'var(--color-primary-2)' },
+    button: { backgroundColor: 'var(--color-primary-2)', color: 'var(--color-white)' },
   },
 };
 
@@ -29,11 +22,12 @@ function buildWhatsAppUrl(packageName) {
 }
 
 export default function ServiceCard({ service }) {
-  const cls = accentClasses[service.accent];
+  const cls = accentStyles[service.accent];
 
   return (
     <article
-      className={`relative flex flex-col border ${cls.border} rounded-2xl p-8 md:p-10 bg-white`}
+      className="relative flex flex-col border rounded-2xl p-8 md:p-10 bg-white"
+      style={cls.border}
       aria-labelledby={`service-title-${service.id}`}
     >
       {/* Badge "Novo" com indicador pulsante */}
@@ -51,7 +45,8 @@ export default function ServiceCard({ service }) {
       )}
       {/* Tag de destaque */}
       <span
-        className={`self-start text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-6 ${cls.tag}`}
+        className="self-start text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-6"
+        style={cls.tag}
       >
         {service.tag}
       </span>
@@ -65,7 +60,7 @@ export default function ServiceCard({ service }) {
       </h3>
 
       {/* Divisor */}
-      <div className={`w-10 h-px ${cls.divider} mb-5`} aria-hidden="true" />
+      <div className="w-10 h-px mb-5" style={cls.divider} aria-hidden="true" />
 
       {/* Descrição */}
       <p className="text-neutral text-sm leading-relaxed mb-7">
@@ -77,7 +72,8 @@ export default function ServiceCard({ service }) {
         {service.deliverables.map((item) => (
           <li key={item} className="flex items-start gap-3 text-sm text-black">
             <span
-              className={`mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full ${cls.bullet}`}
+              className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full"
+              style={cls.bullet}
               aria-hidden="true"
             />
             {item}
@@ -86,7 +82,7 @@ export default function ServiceCard({ service }) {
       </ul>
 
     
-      <div className='mt-auto flex flex-col justify-evenly h-36'>
+      <div className='mt-auto flex flex-col justify-evenly min-h-fit'>
         {/* Preço */}
         <p className="mt-auto text-xs uppercase tracking-widest text-neutral mb-1">
           Investimento
@@ -97,7 +93,8 @@ export default function ServiceCard({ service }) {
           href={buildWhatsAppUrl(service.title)}
           target="_blank"
           rel="noopener noreferrer"
-          className={`mt-auto w-full text-center text-sm font-semibold tracking-wide py-4 px-6 rounded-xl transition-opacity duration-200 hover:opacity-90 ${cls.button}`}
+          className="mt-auto w-full text-center text-sm font-semibold tracking-wide py-4 px-6 rounded-xl transition-opacity duration-200 hover:opacity-90"
+          style={cls.button}
           aria-label={`${service.ctaLabel} — abre no WhatsApp`}
         >
           {service.ctaLabel}

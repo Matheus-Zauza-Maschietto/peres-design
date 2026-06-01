@@ -6,15 +6,6 @@ const { instagram, whatsapp, email } = socialMediaService;
 
 const contacts = [
   {
-    id: "email",
-    icon: email.icon,
-    label: email.label,
-    description: "Prefere escrever? Me manda uma mensagem.",
-    actionLabel: "Enviar e-mail",
-    href: email.url,
-    accent: "primary1",
-  },
-  {
     id: "instagram",
     icon: instagram.icon,
     label: instagram.label,
@@ -43,7 +34,7 @@ export default function ContactSection() {
     >
       <ContactHeader />
 
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         {contacts.map((contact) => (
           <ContactCard key={contact.id} {...contact} />
         ))}

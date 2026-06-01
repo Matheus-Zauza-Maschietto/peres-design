@@ -17,8 +17,8 @@ export default function App() {
         <PortfolioGallerySection />
         <InstagramCarouselSection />
         <ServicesOffersSection />
-        <ContactSection />
         <AboutDesignerSection />
+        <ContactSection />
         <FaqSection />
       </main>
       <Footer />

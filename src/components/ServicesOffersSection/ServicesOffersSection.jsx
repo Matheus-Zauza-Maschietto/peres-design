@@ -3,6 +3,39 @@ import ServiceCard from './Components/ServiceCard';
 
 const services = [
   {
+    id: "designs-redes-sociais",
+    tag: "Mais popular",
+    title: "Designs para Redes Sociais",
+    description:
+      "Posts, stories e capas que param o scroll e traduzem a identidade da sua marca para o feed. Consistência visual que gera reconhecimento e engajamento.",
+    deliverables: [
+      "Posts e Stories individuais ou pacotes mensais",
+      "Revisões inclusas",
+      "Adaptação para diferentes formatos (feed, stories, capa)",
+      "Desenvolvimento e estratégia de conteúdo (opcional)",
+    ],
+    price: "A partir de R$ 80,00",
+    accent: "primary2",
+    ctaLabel: "Quero designs para minhas redes sociais",
+  },
+  {
+    id: "alinhamento-visual",
+    tag: "Novo",
+    isNew: true,
+    title: "Alinhamento Visual",
+    description:
+      "O alinhamento visual é a etapa que define o estilo do seu perfil nas redes sociais. Aqui organizamos a base visual da sua marca para que tudo tenha mais harmonia, organização e transmita sua essência de forma profissional.",
+    deliverables: [
+      "Criação de moodbard definindo o estilo fotográfico que o seu perfil irá seguir",
+      "Definição de tipografia para seus posts",
+      "Paleta de cores do perfil, que comunique a imagem que você deseja transmitir",
+      "3 posts para fixar no perfil, apresentando você e seu trabalho de forma padronizada e profissional"
+    ],
+    price: "A partir de R$ 490,90",
+    accent: "primary1",
+    ctaLabel: "Quero Alinhamento Visual",
+  },
+  {
     id: "identidade-visual",
     tag: "Mais completo",
     title: "Identidade Visual",
@@ -15,25 +48,9 @@ const services = [
       "Manual de uso da marca (brandbook)",
       "Aplicações em mockups reais",
     ],
-    price: "A partir de R$ 629,90",
-    accent: "primary1",
-    ctaLabel: "Quero minha Identidade Visual",
-  },
-  {
-    id: "designs-redes-sociais",
-    tag: "Mais popular",
-    title: "Designs para Redes Sociais",
-    description:
-      "Posts, stories e capas que param o scroll e traduzem a identidade da sua marca para o feed. Consistência visual que gera reconhecimento e engajamento.",
-    deliverables: [
-      "Posts e Stories individuais ou pacotes mensais",
-      "Revisões inclusas",
-      "Adaptação para diferentes formatos (feed, stories, capa)",
-      "Desenvolvimento e estratégia de conteúdo (opcional)",
-    ],
-    price: "A partir de R$ 39,90",
+    price: "A partir de R$ 990,90",
     accent: "primary2",
-    ctaLabel: "Quero designs para minhas redes sociais",
+    ctaLabel: "Quero minha Identidade Visual",
   },
   {
     id: "landing-page",
@@ -50,7 +67,7 @@ const services = [
       "Hospedagem e domínio (opcional)",
     ],
     price: "A partir de R$ 599,90",
-    accent: "black",
+    accent: "primary1",
     ctaLabel: "Quero minha Landing Page",
   },
 ];
@@ -64,7 +81,7 @@ export default function ServicesOffersSection() {
     >
       <ServicesSectionHeader />
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 items-stretch">
         {services.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}

@@ -8,9 +8,9 @@ const navLinks = [
   { label: 'Galeria de Portfólio', href: '#galeria' },
   { label: 'Design para Redes Sociais', href: '#designs-rede-social' },
   { label: 'Ofertas', href: '#ofertas' },
-  { label: 'Contato', href: '#contato' },
   { label: 'Sobre mim', href: '#sobre' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Contato', href: '#contato' },
+  { label: 'Perguntas Frequentes', href: '#faq' },
 ];
 
 export default function HeaderSection() {
