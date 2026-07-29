@@ -7,7 +7,7 @@ export default function HamburgerButton({ menuOpen, onClick }) {
       aria-expanded={menuOpen}
     >
       <i
-        className={`fas ${menuOpen ? 'fa-xmark' : 'fa-bars'} text-base`}
+        className={`fas ${menuOpen ? 'fa-xmark' : 'fa-bars'} text-2xl`}
         aria-hidden="true"
       />
     </button>

@@ -46,7 +46,7 @@ export default function ProjectSidebar({ project, onClose }) {
           className="absolute top-4 right-4 p-2 text-black hover:opacity-60 transition-opacity"
           aria-label="Fechar"
         >
-          <i className="fa-solid fa-xmark text-lg" aria-hidden="true" />
+          <i className="fa-solid fa-xmark text-3xl" aria-hidden="true" />
         </button>
 
         <div className="h-full overflow-y-auto px-6 pt-16 pb-8 md:px-8">
