@@ -7,6 +7,7 @@ import FaqSection from './components/FaqSection/FaqSection';
 import ContactSection from './components/ContactSection/ContactSection';
 import Footer from './components/FooterSection/FooterSection';
 import HeroSection from './components/HeroSection/HeroSection';
+import FloatingWhatsAppButton from './components/FloatingWhatsAppButton/FloatingWhatsAppButton';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <FaqSection />
       </main>
       <Footer />
+      <FloatingWhatsAppButton />
     </div>
   );
 }

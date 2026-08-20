@@ -3,6 +3,7 @@ import { socialMediaService } from '../../../services/SocialMediaService.js';
 const socialLinks = [
   { key: 'instagram', ...socialMediaService.instagram },
   { key: 'behance', ...socialMediaService.behance },
+  { key: 'whatsapp', ...socialMediaService.whatsapp },
 ];
 
 export default function HeroSocialLinks() {
