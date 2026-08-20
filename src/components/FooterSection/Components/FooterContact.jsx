@@ -4,7 +4,7 @@ const { email } = socialMediaService;
 
 const contactInfo = [
   { icon: email.icon, text: email.address },
-  { icon: "fa-solid fa-phone", text: "+55 (44) 99732-4658" },
+  { icon: "fa-solid fa-phone", text: "+55 44 8827-1783" },
   { icon: "fa-solid fa-location-dot", text: "Maringá, PR — Brasil" },
 ];
 

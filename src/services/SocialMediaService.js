@@ -7,8 +7,8 @@ class SocialMediaService {
   };
 
   whatsapp = {
-    number: "554497324658",
-    url: `https://wa.me/554497324658`,
+    number: "554488271783",
+    url: `https://wa.me/554488271783`,
     icon: "fa-brands fa-whatsapp",
     label: "WhatsApp",
     buildUrl(packageName) {
